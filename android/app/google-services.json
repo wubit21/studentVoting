@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1047711640477",
+    "project_id": "studentunionvs",
+    "storage_bucket": "studentunionvs.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1047711640477:android:26f64388fee88ad3b99d74",
+        "android_client_info": {
+          "package_name": "com.example.finalproj"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1Ei0oCc5742vcq2p9SS3op0d8Zkcq4d0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
