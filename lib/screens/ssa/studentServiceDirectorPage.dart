@@ -1,5 +1,5 @@
+import 'package:finalproj/screens/ssa/addClassCandidate.dart';
 import 'package:flutter/material.dart';
-
 
 class studentServiceDirectorPage extends StatelessWidget {
   @override
@@ -15,7 +15,8 @@ class studentServiceDirectorPage extends StatelessWidget {
                 // Navigate to Add Assessment page
               },
               child: Text('Add Assessment'),
-              style: ElevatedButton.styleFrom(foregroundColor: Colors.blue, backgroundColor: Colors.white),
+              style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.blue, backgroundColor: Colors.white),
             ),
           ),
           Padding(
@@ -23,19 +24,24 @@ class studentServiceDirectorPage extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 // Navigate to Add Class Representative Candidates page
+                // NavigaVte to Task 3 page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddStudentScreen()),
+                );
               },
               child: Text('Add Class Rep Candidates'),
-              style: ElevatedButton.styleFrom(foregroundColor: Colors.blue, backgroundColor: Colors.white),
+              style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.blue, backgroundColor: Colors.white),
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4.0),
             child: ElevatedButton(
-              onPressed: () {
-                // Navigate to Task 3 page
-              },
+              onPressed: () {},
               child: Text('Task 3'),
-              style: ElevatedButton.styleFrom(foregroundColor: Colors.blue, backgroundColor: Colors.white),
+              style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.blue, backgroundColor: Colors.white),
             ),
           ),
           Padding(
@@ -45,7 +51,8 @@ class studentServiceDirectorPage extends StatelessWidget {
                 // Navigate to Task 4 page
               },
               child: Text('Task 4'),
-              style: ElevatedButton.styleFrom(foregroundColor: Colors.blue, backgroundColor: Colors.white),
+              style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.blue, backgroundColor: Colors.white),
             ),
           ),
         ],
@@ -78,7 +85,9 @@ class studentServiceDirectorPage extends StatelessWidget {
                   // Button action
                 },
                 child: Text('Get Started'),
-                style: ElevatedButton.styleFrom(foregroundColor: Colors.white, backgroundColor: Colors.blue),
+                style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.blue),
               ),
             ],
           ),

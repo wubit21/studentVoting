@@ -2,13 +2,17 @@ import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalproj/firebase_service.dart';
+import 'package:finalproj/main.dart';
 import 'package:finalproj/screens/registrar/registrarDashboard.dart';
 import 'package:finalproj/screens/ssa/studentServiceDirectorPage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
+
+void main() async {
+  await FirebaseService.initialize();
+  runApp(MyApp());
+}
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -111,14 +115,14 @@ class _LoginPageState extends State<LoginPage> {
                             } else {
                               Fluttertoast.showToast(
                                 msg: 'Your account has not been approved yet',
-                                toastLength: Toast.LENGTH_SHORT,
+                                toastLength: Toast.LENGTH_LONG,
                                 gravity: ToastGravity.BOTTOM,
                               );
                             }
                           } else {
                             Fluttertoast.showToast(
                               msg: 'Incorrect email or password',
-                              toastLength: Toast.LENGTH_SHORT,
+                              toastLength: Toast.LENGTH_LONG,
                               gravity: ToastGravity.BOTTOM,
                             );
                           }
@@ -126,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                       } else {
                         Fluttertoast.showToast(
                           msg: 'Incorrect email or password',
-                          toastLength: Toast.LENGTH_SHORT,
+                          toastLength: Toast.LENGTH_LONG,
                           gravity: ToastGravity.BOTTOM,
                         );
                       }
@@ -134,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                       print('Error signing in: $e');
                       Fluttertoast.showToast(
                         msg: 'An error occurred while signing in. Please try again.',
-                        toastLength: Toast.LENGTH_SHORT,
+                        toastLength: Toast.LENGTH_LONG,
                         gravity: ToastGravity.BOTTOM,
                       );
                     }

@@ -1,10 +1,17 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalproj/firebase_service.dart';
+import 'package:finalproj/main.dart';
 import 'package:finalproj/screens/auth/loginpage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:crypto/crypto.dart';
+
+
+void main() async {
+  await FirebaseService.initialize();
+  runApp(MyApp());
+}
 
 class SignUpScreen extends StatefulWidget {
   @override

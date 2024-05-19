@@ -41,6 +41,7 @@ dependencies:
   screens: ^2.5.0
   crypto: ^3.0.3
   fluttertoast: ^8.2.5
+ 
 
 dev_dependencies:
   flutter_test:

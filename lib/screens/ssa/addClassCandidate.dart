@@ -1,52 +1,158 @@
 import 'package:finalproj/main.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:finalproj/firebase_service.dart';
-
 void main() async {
-  await FirebaseService.initialize();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
-class directorPage extends StatefulWidget {
+
+
+class AddStudentScreen extends StatefulWidget {
   @override
-  _directorPageState createState() => _directorPageState();
+  _AddStudentScreenState createState() => _AddStudentScreenState();
 }
 
-class _directorPageState extends State<directorPage> {
-  final TextEditingController _datacontroller = TextEditingController();
-  final DatabaseReference _databaseRef = FirebaseDatabase.instance.ref().child('student');
+class _AddStudentScreenState extends State<AddStudentScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final DatabaseReference _databaseReference = FirebaseDatabase.instance.reference();
+
+  String _firstName = '';
+  String _lastName = '';
+  String _id = '';
+  String _gender = '';
+  String _department = '';
+  String _section = '';
+  String _academicYear = '';
+
+  void _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      _databaseReference.child('students/$_id').set({
+        'firstName': _firstName,
+        'lastName': _lastName,
+        'id': _id,
+        'gender': _gender,
+        'department': _department,
+        'section': _section,
+        'academicYear': _academicYear,
+      }).then((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Student data added successfully!'))
+        );
+      }).catchError((error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to add student data: $error'))
+        );
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Realtime Database Example'),
+        title: Text('Add Student Data'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _datacontroller,
-              decoration: InputDecoration(labelText: 'Enter some data'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () async {
-                String text = _datacontroller.text;
-
-                // Write data to Realtime Database
-                await _databaseRef.child('student').push().set({
-                  'text': text,
-                  'timestamp': DateTime.now().millisecondsSinceEpoch,
-                });
-
-                _datacontroller.clear();
-              },
-              child: Text('Save to Realtime Database'),
-            ),
-          ],
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            children: [
+              TextFormField(
+                decoration: InputDecoration(labelText: 'First Name'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter first name';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _firstName = value!;
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Last Name'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter last name';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _lastName = value!;
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'ID'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter ID';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _id = value!;
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Gender'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter gender';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _gender = value!;
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Department'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter department';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _department = value!;
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Section'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter section';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _section = value!;
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Academic Year'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter academic year';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _academicYear = value!;
+                },
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _submitForm,
+                child: Text('Add Student'),
+              ),
+            ],
+          ),
         ),
       ),
     );
